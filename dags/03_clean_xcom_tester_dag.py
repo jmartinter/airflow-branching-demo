@@ -6,8 +6,8 @@ from airflow.utils.db import provide_session
 from airflow.models import XCom
 
 
-DAG_NAME = "clean_xcom"
-DAG_NAME_TO_REMOVE = "foo"  # Provide the desired dag name to remove xcoms
+DAG_NAME = "03_clean_xcom"
+DAG_NAME_TO_REMOVE = "02_xcom_tester_dag_2"  # Provide the desired dag name to remove xcoms
 
 DEFAULT_ARGS = {
     "owner": "javi",

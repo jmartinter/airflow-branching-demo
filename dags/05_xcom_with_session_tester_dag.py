@@ -7,7 +7,7 @@ from airflow.utils.session import create_session
 from airflow.models import XCom
 
 
-DAG_NAME = "xcom_direct_db_access_tester"
+DAG_NAME = "05_xcom_direct_db_access_tester"
 DEFAULT_ARGS = {
     "owner": "javi",
 }

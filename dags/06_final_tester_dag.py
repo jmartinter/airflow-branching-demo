@@ -7,7 +7,7 @@ from airflow.operators.dummy import DummyOperator
 from airflow.utils.trigger_rule import TriggerRule
 
 
-DAG_NAME = "final_tester"
+DAG_NAME = "06_final_tester"
 DEFAULT_ARGS = {
     "owner": "javi",
 }

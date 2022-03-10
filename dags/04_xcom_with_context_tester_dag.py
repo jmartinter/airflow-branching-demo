@@ -5,7 +5,7 @@ from airflow import DAG
 from airflow.decorators import task
 from airflow.operators.python import PythonOperator, get_current_context
 
-DAG_NAME = "xcom_with_context_tester"
+DAG_NAME = "04_xcom_with_context_tester"
 DEFAULT_ARGS = {
     "owner": "javi",
 }

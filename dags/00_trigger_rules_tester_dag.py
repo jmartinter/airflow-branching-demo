@@ -7,7 +7,7 @@ from airflow.exceptions import AirflowFailException
 from airflow.utils.trigger_rule import TriggerRule
 
 
-DAG_NAME = "trigger_rule_tester"
+DAG_NAME = "00_trigger_rule_tester"
 DEFAULT_ARGS = {
     "owner": "javi",
 }

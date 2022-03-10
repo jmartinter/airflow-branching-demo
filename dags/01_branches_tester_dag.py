@@ -11,7 +11,7 @@ from airflow.operators.weekday import BranchDayOfWeekOperator
 from airflow.utils.edgemodifier import Label
 
 
-DAG_NAME = "branches_tester"
+DAG_NAME = "01_branches_tester"
 DEFAULT_ARGS = {
     "owner": "javi",
 }
