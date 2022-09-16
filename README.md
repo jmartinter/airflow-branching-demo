@@ -34,16 +34,16 @@ As a result of the study, a list of operative Airflow DAGs are available:
   * A final wrapper example with a branch operator, which condition is set dynamically by one of the branches 
 
 ## How to use
-How to install Airflow locally with Docker is detailed in this [Quick Start](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html) and the enviroment is initialized, run `docker-compose up`.
-In short words, you have to initialize the environment for the first time
+How to install Airflow locally with Docker is detailed in this [Quick Start](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html).
+Anyway, all you require is initializing the environment for the first time by:
 ```
 mkdir -p ./logs ./plugins
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 docker-compose up airflow-init
 ```
-After that just run `docker-compose up` and you are ready to test the DAGS on your [local Airflow](http://localhost:8080)
+After that, just run `docker-compose up -d` and you are ready to test your DAGS on a [local Airflow instance](http://localhost:8080) (user:airflow / pwd:airflow)
 
-To clean the environment just:
+To clean the full environment just run:
 ```
-docker-compose down --volumes --remove-orphans command
+docker-compose down --volumes --remove-orphans
 ```
