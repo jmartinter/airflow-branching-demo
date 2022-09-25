@@ -5,19 +5,25 @@ from airflow.decorators import task
 from airflow.utils.db import provide_session
 from airflow.models import XCom
 
+from common import DEFAULT_ARGS
 
-DAG_NAME = "03_clean_xcom"
-DAG_NAME_TO_REMOVE = "02_xcom_tester_dag_2"  # Provide the desired dag name to remove xcoms
-
-DEFAULT_ARGS = {
-    "owner": "javi",
-}
+DAG_NAME = "07_clean_xcom"
+DAGS_NAME_TO_CLEAN = [
+    "01_branches",
+    "02_xcom_push",
+    "03_xcom_return",
+    "04_xcom_advanced",
+]
 
 
 @task
 @provide_session
 def cleanup_xcom(session=None):
-    session.query(XCom).filter(XCom.dag_id == DAG_NAME_TO_REMOVE).delete()
+    """ Delete all existing stored XCOMs in configured DAGs"""
+    session \
+        .query(XCom) \
+        .filter(XCom.dag_id.in_(DAGS_NAME_TO_CLEAN)) \
+        .delete(synchronize_session="fetch")
 
 
 with DAG(

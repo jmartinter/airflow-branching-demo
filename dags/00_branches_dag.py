@@ -10,11 +10,9 @@ from airflow.operators.python import ShortCircuitOperator
 from airflow.operators.weekday import BranchDayOfWeekOperator
 from airflow.utils.edgemodifier import Label
 
+from common import DEFAULT_ARGS
 
-DAG_NAME = "01_branches_tester"
-DEFAULT_ARGS = {
-    "owner": "javi",
-}
+DAG_NAME = "00_branches"
 
 
 def input_launcher(both_paths: str):
@@ -49,12 +47,11 @@ with DAG(
     dag.doc_md = dedent(
         """\
     #### Test for different branches options
-
     ```
     {
         "both": "yes" / "no" (default "no"),
     }
-    ```
+    ``` 
     """
     )
 

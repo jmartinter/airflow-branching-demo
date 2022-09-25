@@ -6,11 +6,10 @@ from airflow.decorators import task
 from airflow.exceptions import AirflowFailException
 from airflow.utils.trigger_rule import TriggerRule
 
+from common import DEFAULT_ARGS
 
-DAG_NAME = "00_trigger_rule_tester"
-DEFAULT_ARGS = {
-    "owner": "javi",
-}
+
+DAG_NAME = "01_trigger_rules"
 
 
 def log_dependencies(ti):
@@ -25,31 +24,26 @@ def failed():
 
 @task
 def all_successed(ti=None):
-    sleep(3)
     log_dependencies(ti)
 
 
 @task(trigger_rule=TriggerRule.ALL_FAILED)
 def all_failed(ti=None):
-    sleep(3)
     log_dependencies(ti)
 
 
 @task(trigger_rule=TriggerRule.ONE_SUCCESS)
 def one_success(ti=None):
-    sleep(3)
     log_dependencies(ti)
 
 
 @task(trigger_rule=TriggerRule.NONE_FAILED)
 def none_failed(ti=None):
-    sleep(3)
     log_dependencies(ti)
 
 
 @task(trigger_rule=TriggerRule.NONE_FAILED_MIN_ONE_SUCCESS)
 def none_failed_one_success(ti=None):
-    sleep(3)
     log_dependencies(ti)
 
 
@@ -68,6 +62,7 @@ with DAG(
     one_success_task = one_success()
     none_failed_task = none_failed()
     none_failed_one_success_task = none_failed_one_success()
+    none_failed_one_success_another_task = none_failed_one_success()
 
     fail_task >> all_successed_task
     fail_task >> all_failed_task
@@ -75,3 +70,4 @@ with DAG(
     [fail_task, all_successed_task, all_failed_task, all_failed_another_task] >> one_success_task
     [all_failed_task, all_failed_another_task] >> none_failed_task
     [all_failed_task, all_failed_another_task, all_successed_task] >> none_failed_one_success_task
+    [all_failed_task, all_failed_another_task] >> none_failed_one_success_another_task
